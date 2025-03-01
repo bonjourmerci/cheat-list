@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1740824431388,
+      "tag": "20250301102031_ambiguous_hellion",
+      "breakpoints": true
+    }
+  ]
+}
