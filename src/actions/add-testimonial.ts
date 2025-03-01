@@ -23,7 +23,7 @@ export async function addTestimonial(formData: FormData) {
 
 		// Insert the new testimonial
 		await database.insert(infidelityTestimonialTable).values({
-			status: "pending",
+			status: "approved",
 			author_username: authorUsername,
 			cheater_username: cheaterUsername,
 			story: story,
