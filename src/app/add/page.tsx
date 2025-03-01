@@ -1,13 +1,11 @@
 import { Input } from "@/components/input";
 import { Textarea } from "@/components/textarea";
-import { Title } from "@/components/title";
 import { Label } from "@/components/label";
 import { Button } from "@/components/button";
 
 export default function Page() {
   return (
     <>
-      <Title />
       <form className="flex flex-col gap-8">
         <div className="flex flex-col gap-2">
           <Label htmlFor="author_username">Ton instagram</Label>

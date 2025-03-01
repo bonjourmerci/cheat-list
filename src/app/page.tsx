@@ -1,10 +1,8 @@
-import { Title } from "@/components/title";
 import Link from "next/link";
 
 export default function Page() {
   return (
     <>
-      <Title />
       <ul className="list-disc list-inside flex flex-col gap-4">
         <li>@jean_mono</li>
         <li>@jean_mono</li>
