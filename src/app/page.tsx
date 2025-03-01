@@ -9,21 +9,21 @@ export default async function Page() {
 		.select()
 		.from(infidelityTestimonialTable)
 		.where(eq(infidelityTestimonialTable.status, "approved"))
-		.orderBy(infidelityTestimonialTable.created_at)
+		.orderBy(infidelityTestimonialTable.createdAt)
 		.all();
 
 	const isEmpty = testimonials.length === 0;
 
 	return (
-		<>
+		<div className="max-w-md mx-auto p-8 w-full pb-24 flex flex-col gap-8">
 			{isEmpty && <p>Pas de cheater pour le moment</p>}
 			{!isEmpty && <TestimonialList testimonials={testimonials} />}
 			<Link
 				href="/add"
-				className="absolute bottom-0 left-0 w-full py-4 border-t text-4xl font-bold text-center"
+				className="fixed bg-background bottom-0 left-0 w-full h-16 border-t text-4xl font-bold text-center flex items-center justify-center"
 			>
 				+
 			</Link>
-		</>
+		</div>
 	);
 }

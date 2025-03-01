@@ -72,7 +72,10 @@ export default function Page() {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit} className="flex flex-col gap-8">
+			<form
+				onSubmit={handleSubmit}
+				className="max-w-md mx-auto p-8 w-full flex flex-col gap-8"
+			>
 				<div className="flex flex-col gap-2">
 					<Label htmlFor="author_username">Ton instagram</Label>
 					<Input
@@ -116,10 +119,6 @@ export default function Page() {
 					/>
 					{isUploading && (
 						<div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-							<div
-								className="bg-blue-600 h-2.5 rounded-full"
-								style={{ width: `${uploadProgress}%` }}
-							></div>
 							<p className="text-xs text-gray-500 mt-1">
 								Uploading: {uploadProgress}%
 							</p>

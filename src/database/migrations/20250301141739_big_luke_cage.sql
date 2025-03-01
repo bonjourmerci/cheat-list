@@ -5,5 +5,5 @@ CREATE TABLE `infidelity_testimonials` (
 	`cheater_username` text NOT NULL,
 	`story` text NOT NULL,
 	`proof_path` text,
-	`created_at` text NOT NULL
+	`created_at` integer NOT NULL
 );

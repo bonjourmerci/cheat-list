@@ -24,11 +24,10 @@ export async function addTestimonial(formData: FormData) {
 		// Insert the new testimonial
 		await database.insert(infidelityTestimonialTable).values({
 			status: "approved",
-			author_username: authorUsername,
-			cheater_username: cheaterUsername,
-			story: story,
-			proof_path: proofPath,
-			created_at: new Date().toISOString(),
+			authorUsername,
+			cheaterUsername,
+			story,
+			proofPath,
 		});
 
 		// Revalidate the home page to show the new testimonial

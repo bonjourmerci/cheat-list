@@ -1,6 +1,6 @@
 interface Testimonial {
 	id: string;
-	cheater_username: string;
+	cheaterUsername: string;
 }
 
 interface TestimonialListProps {
@@ -11,7 +11,7 @@ export function TestimonialList({ testimonials }: TestimonialListProps) {
 	return (
 		<ul className="list-disc list-inside flex flex-col gap-4">
 			{testimonials.map((testimonial) => (
-				<li key={testimonial.id}>@{testimonial.cheater_username}</li>
+				<li key={testimonial.id}>@{testimonial.cheaterUsername}</li>
 			))}
 		</ul>
 	);

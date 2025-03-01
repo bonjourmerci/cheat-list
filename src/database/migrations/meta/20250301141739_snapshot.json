@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "f477a1bd-f02d-49e8-a541-8c198b12c631",
+  "id": "ea9de75e-d3b4-43f4-b04a-6b911e7f60db",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "infidelity_testimonials": {
@@ -51,7 +51,7 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
