@@ -1,13 +1,13 @@
 {
-  "version": "7",
-  "dialect": "sqlite",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "6",
-      "when": 1740838659025,
-      "tag": "20250301141739_big_luke_cage",
-      "breakpoints": true
-    }
-  ]
+	"version": "7",
+	"dialect": "sqlite",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "6",
+			"when": 1740838659025,
+			"tag": "20250301141739_big_luke_cage",
+			"breakpoints": true
+		}
+	]
 }
