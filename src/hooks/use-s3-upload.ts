@@ -39,6 +39,14 @@ export function useS3Upload(options?: UseS3UploadOptions): UseS3UploadReturn {
 			return null;
 		}
 
+		// Validate that the file is an image
+		if (!file.type.startsWith("image/")) {
+			const error = new Error("Only image files are allowed");
+			setUploadError(error);
+			options?.onUploadError?.(error);
+			return null;
+		}
+
 		try {
 			setIsUploading(true);
 			setUploadError(null);
@@ -61,60 +69,24 @@ export function useS3Upload(options?: UseS3UploadOptions): UseS3UploadReturn {
 				throw new Error("No file key returned from server");
 			}
 
-			// Upload the file directly to S3 using the presigned URL and XMLHttpRequest to track progress
-			return new Promise((resolve, reject) => {
-				const xhr = new XMLHttpRequest();
-
-				// Set up progress tracking
-				xhr.upload.onprogress = (event) => {
-					if (event.lengthComputable) {
-						const progress = Math.round((event.loaded / event.total) * 100);
-						setUploadProgress(progress);
-					}
-				};
-
-				// Set up completion handler
-				xhr.onload = () => {
-					if (xhr.status >= 200 && xhr.status < 300) {
-						// File uploaded successfully
-						setIsUploading(false);
-						setUploadProgress(100);
-
-						// Make sure we have a fileKey before calling the success callback
-						if (result.fileKey) {
-							// Call the success callback with the file key
-							options?.onUploadSuccess?.(result.fileKey);
-							resolve(result.fileKey);
-						} else {
-							const error = new Error("No file key available after upload");
-							setUploadError(error);
-							options?.onUploadError?.(error);
-							reject(error);
-						}
-					} else {
-						// Upload failed
-						const error = new Error(`Upload failed with status: ${xhr.status}`);
-						setUploadError(error);
-						setIsUploading(false);
-						options?.onUploadError?.(error);
-						reject(error);
-					}
-				};
-
-				// Set up error handler
-				xhr.onerror = () => {
-					const error = new Error("Network error occurred during upload");
-					setUploadError(error);
-					setIsUploading(false);
-					options?.onUploadError?.(error);
-					reject(error);
-				};
-
-				// Open and send the request
-				xhr.open("PUT", result.presignedUrl);
-				xhr.setRequestHeader("Content-Type", file.type);
-				xhr.send(file);
+			// Upload the file directly to S3 using the presigned URL with fetch API
+			const response = await fetch(result.presignedUrl, {
+				method: "PUT",
+				headers: {
+					"Content-Type": file.type,
+				},
+				body: file,
 			});
+
+			if (!response.ok) {
+				throw new Error(`Upload failed with status: ${response.status}`);
+			}
+
+			// Upload completed successfully
+			setIsUploading(false);
+			setUploadProgress(100);
+			options?.onUploadSuccess?.(result.fileKey);
+			return result.fileKey;
 		} catch (error) {
 			const err =
 				error instanceof Error ? error : new Error("An unknown error occurred");

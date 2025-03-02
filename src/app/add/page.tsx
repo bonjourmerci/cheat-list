@@ -16,7 +16,7 @@ export default function Page() {
 	const router = useRouter();
 
 	// Use our custom hook for S3 uploads
-	const { uploadFile, isUploading, uploadError, uploadProgress } = useS3Upload({
+	const { uploadFile, isUploading, uploadError } = useS3Upload({
 		onUploadError: (err) => {
 			setError(err.message);
 			setIsSubmitting(false);
@@ -82,8 +82,11 @@ export default function Page() {
 						id="author_username"
 						name="author_username"
 						placeholder="your_instagram"
-						pattern="(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9_][a-zA-Z0-9_.]{0,28}"
+						pattern="(?!.*\.\.)(?!.*\.$)[a-z0-9_][a-z0-9_.]{0,28}"
 						required
+						onChange={(e) => {
+							e.target.value = e.target.value.toLowerCase();
+						}}
 					/>
 				</div>
 				<div className="flex flex-col gap-2">
@@ -92,8 +95,11 @@ export default function Page() {
 						id="cheater_username"
 						name="cheater_username"
 						placeholder="cheater_instagram"
-						pattern="(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9_][a-zA-Z0-9_.]{0,28}"
+						pattern="(?!.*\.\.)(?!.*\.$)[a-z0-9_][a-z0-9_.]{0,28}"
 						required
+						onChange={(e) => {
+							e.target.value = e.target.value.toLowerCase();
+						}}
 					/>
 				</div>
 				<div className="flex flex-col gap-2">
@@ -115,15 +121,9 @@ export default function Page() {
 						id="proof_path"
 						name="proof_path"
 						type="file"
+						accept="image/*"
 						disabled={isSubmitting || isUploading}
 					/>
-					{isUploading && (
-						<div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-							<p className="text-xs text-gray-500 mt-1">
-								Uploading: {uploadProgress}%
-							</p>
-						</div>
-					)}
 				</div>
 
 				{error && <p className="text-red-500 text-sm">{error}</p>}
